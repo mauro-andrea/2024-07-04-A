@@ -1,8 +1,8 @@
 import flet as ft
 
 
-class View(ft.UserControl):
-    def __init__(self, page: ft.Page):
+class View(ft.UserControl) :
+    def __init__(self, page: ft.Page) :
         super().__init__()
         # page stuff
         self._page = page
@@ -23,14 +23,16 @@ class View(ft.UserControl):
         self.txt_result1 = None  # Qui scrivere gli outputs del punto 1
         self.txt_result2 = None  # Qui scrivere gli outputs del punto 2
 
-    def load_interface(self):
+    def load_interface(self) :
         # title
         self._title = ft.Text("TdP 2024 - Esame del 04-07-2024 - A", color="blue", size=24)
         self._page.controls.append(self._title)
 
         # First row with some controls
         self.ddyear = ft.Dropdown(label="Anno",
-                                  hint_text="Anno da analizzare per gli avvistamenti.")
+                                  hint_text="Anno da analizzare per gli avvistamenti.",
+                                  on_change=self._controller.fillDD_shape)
+        self._controller.fillDD_year()
 
         self.ddshape = ft.Dropdown(label="Shape",
                                    hint_text="Shape da analizzare per gli avvistamenti.")
@@ -81,21 +83,21 @@ class View(ft.UserControl):
         self._page.update()
 
     @property
-    def controller(self):
+    def controller(self) :
         return self._controller
 
     @controller.setter
-    def controller(self, controller):
+    def controller(self, controller) :
         self._controller = controller
 
-    def set_controller(self, controller):
+    def set_controller(self, controller) :
         self._controller = controller
 
-    def create_alert(self, message):
+    def create_alert(self, message) :
         dlg = ft.AlertDialog(title=ft.Text(message))
         self._page.dialog = dlg
         dlg.open = True
         self._page.update()
 
-    def update_page(self):
+    def update_page(self) :
         self._page.update()
